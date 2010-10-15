@@ -3,25 +3,25 @@
 
 #include <QImage>
 #include <QRect>
+#include <QWidget>
 
-class Paddle
+class Paddle : public QWidget
 {
+  Q_OBJECT
 
-  public:
-    Paddle();
-    ~Paddle();
+public:
+  Paddle();
+  ~Paddle();
 
-  public:
-    void resetState();
-    void moveLeft(int);
-    void moveRight(int);
-    void movePaddle(int);
-    QRect getRect();
-    QImage & getImage();
+public:
+  void resetState();
+  void movePaddle(int);
+  QRect getRect();
+  QImage & getImage();
 
-  private:
-    QImage image;
-    QRect rect;
+private:
+  QImage image;
+  QRect rect;
 
 };
 

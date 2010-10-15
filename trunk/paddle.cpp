@@ -13,24 +13,24 @@ Paddle::~Paddle()
 {
 }
 
-void Paddle::moveLeft(int left)
-{
-  if (rect.left() >= 2)
-    rect.moveTo(left, rect.top());
-}
-
-void Paddle::moveRight(int right)
-{
-  if (rect.right() <= 298)
-    rect.moveTo(right, rect.top());
-}
-
 void Paddle::movePaddle(int position)
 {
-    if (position > 0 && position < 500)
+  if (position > 0 && position < 500)
+  {
+    if (position <= 40)
     {
-        rect.moveTo(position, rect.top());
+      rect.moveTo(0, rect.top());
     }
+    else if(position > 40 && position < 500-40)
+    {
+      rect.moveTo(position - 40, rect.top());
+    }
+    else
+    {
+      rect.moveTo(500-80, rect.top());
+    }
+
+  }
 }
 
 void Paddle::resetState()

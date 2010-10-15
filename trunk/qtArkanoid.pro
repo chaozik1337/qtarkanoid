@@ -1,5 +1,7 @@
 HEADERS += paddle.h \
-    arkanoid.h
+    arkanoid.h \
+    ball.h
 SOURCES += paddle.cpp \
     arkanoid.cpp \
-    main.cpp
+    main.cpp \
+    ball.cpp

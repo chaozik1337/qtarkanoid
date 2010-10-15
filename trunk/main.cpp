@@ -3,11 +3,11 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
+  QApplication app(argc, argv);
 
-    Arkanoid::Arkanoid game;
-    game.resize(500,500);
-    game.show();
+  Arkanoid::Arkanoid *game = new Arkanoid();
+  game->resize(500,500);
+  game->show();
 
-    return app.exec();
+  return app.exec();
 }
