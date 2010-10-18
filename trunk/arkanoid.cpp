@@ -13,6 +13,10 @@ Arkanoid::Arkanoid(QWidget *parent) : QWidget(parent)
   startGame();
   setWindowTitle("qtArkanoid");
   setMouseTracking(true);
+  setGameArea(520, 600);
+  this->setFixedSize(gameAreaWidth, gameAreaHeight);
+  this->setPalette(QPalette(Qt::black));
+  this->setAutoFillBackground(true);
 }
 
 Arkanoid::~Arkanoid()
@@ -20,9 +24,17 @@ Arkanoid::~Arkanoid()
   delete paddle;
 }
 
-bool Arkanoid::setGameArea(int height, int width)
+bool Arkanoid::setGameArea(int width, int height)
 {
+  if (height > 0)
+  {
+    gameAreaHeight = height;
+  }
 
+  if (width > 0)
+  {
+    gameAreaWidth = width;
+  }
 }
 
 void Arkanoid::paintEvent(QPaintEvent *event)
@@ -105,7 +117,7 @@ void Arkanoid::mousePressEvent(QMouseEvent *event)
 void Arkanoid::mouseMoveEvent(QMouseEvent *event)
 {
   QPoint pos = event->pos();
-  paddle->movePaddle(pos.x());
+  paddle->movePaddle(pos.x(), gameAreaWidth);
 }
 
 void Arkanoid::startGame()

@@ -4,6 +4,7 @@
 #include "paddle.h"
 #include <QWidget>
 #include <QKeyEvent>
+#include <QPalette>
 
 class Arkanoid : public QWidget
 {
@@ -25,7 +26,7 @@ protected:
   void stopGame();
   void victory();
 
-  bool setGameArea(int height, int width);
+  bool setGameArea(int width, int height);
 
 private:
   int x;

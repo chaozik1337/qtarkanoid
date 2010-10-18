@@ -13,21 +13,21 @@ Paddle::~Paddle()
 {
 }
 
-void Paddle::movePaddle(int position)
+void Paddle::movePaddle(int position, int gameAreaWidth)
 {
-  if (position > 0 && position < 500)
+  if (position > 0 && position < gameAreaWidth)
   {
     if (position <= 40)
     {
       rect.moveTo(0, rect.top());
     }
-    else if(position > 40 && position < 500-40)
+    else if(position > 40 && position < gameAreaWidth-40)
     {
       rect.moveTo(position - 40, rect.top());
     }
     else
     {
-      rect.moveTo(500-80, rect.top());
+      rect.moveTo(gameAreaWidth-80, rect.top());
     }
 
   }
