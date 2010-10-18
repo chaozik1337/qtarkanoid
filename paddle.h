@@ -15,7 +15,7 @@ public:
 
 public:
   void resetState();
-  void movePaddle(int);
+  void movePaddle(int position, int gameAreaWidth);
   QRect getRect();
   QImage & getImage();
 

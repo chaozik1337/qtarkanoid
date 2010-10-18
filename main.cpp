@@ -1,12 +1,13 @@
 #include <QApplication>
-#include "arkanoid.h"
+#include "mainwindow.h"
+//#include "arkanoid.h"
 
 int main(int argc, char *argv[])
 {
   QApplication app(argc, argv);
 
-  Arkanoid::Arkanoid *game = new Arkanoid();
-  game->resize(500,500);
+  mainwindow::mainwindow *game = new mainwindow();
+  game->arkanoid->setVisible(true);
   game->show();
 
   return app.exec();
