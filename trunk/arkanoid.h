@@ -2,6 +2,7 @@
 #define ARKANOID_H
 
 #include "paddle.h"
+#include "ball.h"
 #include <QWidget>
 #include <QKeyEvent>
 #include <QPalette>
@@ -32,6 +33,7 @@ private:
   int x;
   int timerId;
   Paddle *paddle;
+  Ball *ball;
   bool gameOver;
   bool gameWon;
   bool gameStarted;
