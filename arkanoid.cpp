@@ -10,6 +10,7 @@ Arkanoid::Arkanoid(QWidget *parent) : QWidget(parent)
   paused = FALSE;
   gameStarted = FALSE;
   paddle = new Paddle();
+  ball = new Ball();
   startGame();
   setWindowTitle("qtArkanoid");
   setMouseTracking(true);
@@ -72,6 +73,7 @@ void Arkanoid::paintEvent(QPaintEvent *event)
   else
   {
     painter.drawImage(paddle->getRect(), paddle->getImage());
+    painter.drawImage(ball->getRect(), ball->getImage());
   }
 }
 
@@ -118,6 +120,7 @@ void Arkanoid::mouseMoveEvent(QMouseEvent *event)
 {
   QPoint pos = event->pos();
   paddle->movePaddle(pos.x(), gameAreaWidth);
+  ball->moveBall(pos.x(), pos.y(), gameAreaWidth, gameAreaHeight);
 }
 
 void Arkanoid::startGame()

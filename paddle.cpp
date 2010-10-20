@@ -1,6 +1,5 @@
 #include "paddle.h"
 
-
 Paddle::Paddle()
 {
   image.load("mela.png");

@@ -1,17 +1,29 @@
 #ifndef BALL_H
 #define BALL_H
 
+#include <QImage>
+#include <QRect>
 #include <QWidget>
 
 class Ball : public QWidget
 {
   Q_OBJECT
+
 public:
-  explicit Ball(QWidget *parent = 0);
+  Ball();
+  ~Ball();
 
-signals:
+public:
+  void resetState();
+  void moveBall(int x, int y, int gameAreaWidth, int gameAreaHeight);
+  QRect getRect();
+  QImage & getImage();
 
-public slots:
+private:
+  QImage image;
+  QRect rect;
+  int posX;
+  int posY;
 
 };
 
