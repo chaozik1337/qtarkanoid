@@ -9,38 +9,39 @@
 
 class Arkanoid : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  Arkanoid(QWidget *parent = 0);
-  ~Arkanoid();
+    Arkanoid(QWidget *parent = 0);
+    ~Arkanoid();
+    void startGame();
+    void pauseGame();
+    void stopGame();
+    bool isPaused();
+    bool isGameStarted();
 
 protected:
-  void paintEvent(QPaintEvent *event);
-  void timerEvent(QTimerEvent *event);
-  void keyPressEvent(QKeyEvent *event);
-  void mousePressEvent(QMouseEvent *event);
-  void mouseMoveEvent(QMouseEvent *event);
+    void paintEvent(QPaintEvent *event);
+    void timerEvent(QTimerEvent *event);
+    //void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
 
-  void startGame();
-  void pauseGame();
-  void stopGame();
-  void victory();
+    void victory();
 
-  bool setGameArea(int width, int height);
+    bool setGameArea(int width, int height);
 
 private:
-  int x;
-  int timerId;
-  Paddle *paddle;
-  Ball *ball;
-  bool gameOver;
-  bool gameWon;
-  bool gameStarted;
-  bool paused;
-  QRect rect;
-  int gameAreaWidth;
-  int gameAreaHeight;
+    int x;
+    int timerId;
+    Paddle *paddle;
+    Ball *ball;
+    bool gameOver;
+    bool gameWon;
+    bool gameStarted;
+    bool paused;
+    QRect rect;
+    int gameAreaWidth;
+    int gameAreaHeight;
 
 };
 
