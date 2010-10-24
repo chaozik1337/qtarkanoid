@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QHBoxLayout>
+#include <QApplication>
 #include "arkanoid.h"
 
 class mainwindow : public QWidget
@@ -11,6 +12,10 @@ class mainwindow : public QWidget
 public:
   explicit mainwindow(QWidget *parent = 0);
   Arkanoid *arkanoid;
+
+protected:
+  void keyPressEvent(QKeyEvent *event);
+  void mousePressEvent(QMouseEvent *event);
 
 private:
   QHBoxLayout *layout;
