@@ -6,10 +6,14 @@ mainwindow::mainwindow(QWidget *parent) :
     this->setFixedSize(800, 650);
     arkanoid = new Arkanoid();
     layout = new QHBoxLayout;
+    timer = new QTimer(this);
+    txt = new QTextEdit(this);
 
     layout->addWidget(arkanoid);
+    layout->addWidget(txt);
     setLayout(layout);
-    //arkanoid->setVisible(false);
+
+    connect(timer,SIGNAL(timeout()), this, SLOT(timerTick()));
 }
 
 void mainwindow::keyPressEvent(QKeyEvent *event)
@@ -54,6 +58,16 @@ void mainwindow::mousePressEvent(QMouseEvent *event)
         if (arkanoid->isGameStarted())
         {
             this->setWindowTitle("qtArkanoid (running)");
+            timer->start(10);
         }
     }
+}
+
+void mainwindow::timerTick()
+{
+  if (arkanoid->ball->checkBallPosition())
+  {
+    arkanoid->repaint();
+  }
+  //txt->setText(txt->toPlainText() + ".");
 }

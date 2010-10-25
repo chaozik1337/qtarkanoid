@@ -5,10 +5,29 @@ Ball::Ball()
   image.load("ball.png");
   rect = image.rect();
   resetState();
+  this->speedX = 100; //100 pixels per second
+  this->speedY = 100;
+  this->posX = 100;
+  this->posY = 100;
+  this->nextPosX = posX;
+  this->nextPosY = posY;
 }
 
 Ball::~Ball()
 {
+}
+
+bool Ball::checkBallPosition()
+{
+  this->nextPosX = this->nextPosX + (this->speedX / 1000 * 10);
+  this->nextPosY = this->nextPosY + (this->nextPosY / 1000 * 10);
+
+  if (floor(nextPosX) > posX || floor(nextPosY) > posY)
+  {
+    return true;
+  }
+
+  return false;
 }
 
 void Ball::moveBall(int x, int y, int gameAreaWidth, int gameAreaHeight)
