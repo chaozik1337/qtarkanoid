@@ -3,7 +3,9 @@
 
 #include <QWidget>
 #include <QHBoxLayout>
+#include <QTimer>
 #include <QApplication>
+#include <QTextEdit>
 #include "arkanoid.h"
 
 class mainwindow : public QWidget
@@ -19,9 +21,12 @@ protected:
 
 private:
   QHBoxLayout *layout;
+  QTimer *timer;
+  QTextEdit *txt;
 signals:
 
 public slots:
+  void timerTick();
 
 };
 

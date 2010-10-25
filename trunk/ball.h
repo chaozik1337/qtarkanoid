@@ -4,6 +4,7 @@
 #include <QImage>
 #include <QRect>
 #include <QWidget>
+#include <math.h>
 
 class Ball : public QWidget
 {
@@ -16,6 +17,7 @@ public:
 public:
   void resetState();
   void moveBall(int x, int y, int gameAreaWidth, int gameAreaHeight);
+  bool checkBallPosition();
   QRect getRect();
   QImage & getImage();
 
@@ -24,6 +26,10 @@ private:
   QRect rect;
   int posX;
   int posY;
+  double nextPosX;
+  double nextPosY;
+  int speedX;
+  int speedY;
 
 };
 
