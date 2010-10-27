@@ -65,9 +65,12 @@ void mainwindow::mousePressEvent(QMouseEvent *event)
 
 void mainwindow::timerTick()
 {
-  if (arkanoid->ball->checkBallPosition())
-  {
-    arkanoid->repaint();
-  }
-  //txt->setText(txt->toPlainText() + ".");
+    if (arkanoid->ball->checkBallPosition())
+    {
+        if (arkanoid->ball->checkCollisions())
+        {
+
+        }
+        arkanoid->repaint();
+    }
 }
