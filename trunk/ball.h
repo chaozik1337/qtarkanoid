@@ -21,6 +21,9 @@ public:
   bool checkCollisions();
   QRect getRect();
   QImage & getImage();
+  int getPosX();
+  int getPosY();
+  int hitCount;
 
 private:
   QImage image;

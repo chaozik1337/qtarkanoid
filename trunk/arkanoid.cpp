@@ -26,6 +26,16 @@ Arkanoid::~Arkanoid()
   delete paddle;
 }
 
+int Arkanoid::getGameAreaW()
+{
+  return gameAreaWidth;
+}
+
+int Arkanoid::getGameAreaH()
+{
+  return gameAreaHeight;
+}
+
 bool Arkanoid::setGameArea(int width, int height)
 {
   if (height > 0)
@@ -84,7 +94,7 @@ void Arkanoid::mouseMoveEvent(QMouseEvent *event)
   {
     QPoint pos = event->pos();
     paddle->movePaddle(pos.x(), gameAreaWidth);
-    ball->moveBall(pos.x(), pos.y(), gameAreaWidth, gameAreaHeight);
+    //ball->moveBall(pos.x(), pos.y(), gameAreaWidth, gameAreaHeight);
   }
 
 }

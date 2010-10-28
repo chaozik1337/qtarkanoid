@@ -20,6 +20,8 @@ public:
   bool isPaused();
   bool isGameStarted();
   Ball *ball;
+  int getGameAreaW();
+  int getGameAreaH();
 
 protected:
   void paintEvent(QPaintEvent *event);
