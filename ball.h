@@ -18,24 +18,26 @@ public:
   void resetState();
   void moveBall(int x, int y, int gameAreaWidth, int gameAreaHeight);
   bool checkBallPosition();
-  bool checkCollisions();
+  //bool checkCollisions();
   QRect getRect();
   QImage & getImage();
   int getPosX();
   int getPosY();
   int hitCount;
 
-private:
-  QImage image;
-  QRect rect;
   int posX;
   int posY;
   double nextPosX;
   double nextPosY;
-  int speedX;
-  int speedY;
+  double speedX;
+  double speedY;
   bool XChanged;
   bool YChanged;
+
+private:
+  QImage image;
+  QRect rect;
+
 
 };
 

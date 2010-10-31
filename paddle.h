@@ -18,10 +18,12 @@ public:
   void movePaddle(int position, int gameAreaWidth);
   QRect getRect();
   QImage & getImage();
+  int getPosX();
 
 private:
   QImage image;
   QRect rect;
+  int posX;
 
 };
 
