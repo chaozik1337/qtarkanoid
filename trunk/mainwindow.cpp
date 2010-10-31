@@ -58,19 +58,19 @@ void mainwindow::mousePressEvent(QMouseEvent *event)
     if (arkanoid->isGameStarted())
     {
       this->setWindowTitle("qtArkanoid (running)");
-      timer->start(100);
+      timer->start(10);
     }
   }
 }
 
 void mainwindow::timerTick()
 {
-  this->txt->setText(QString::number(arkanoid->ball->hitCount) + "\n" + QString::number(arkanoid->ball->getPosX()) + "," + QString::number(arkanoid->ball->getPosY()) );
+ this->txt->setText(QString::number(arkanoid->hitCount) + "\n" + QString::number(arkanoid->ball->getPosX()) + "," + QString::number(arkanoid->ball->getPosY()) + "\n" + QString::number(arkanoid->paddle->getPosX()));
   //this->txt->setText(QString::number(arkanoid->ball->getPosX()) + "," + QString::number(arkanoid->ball->getPosY()));
 
   if (arkanoid->ball->checkBallPosition())
   {
-    if (arkanoid->ball->checkCollisions())
+    if (arkanoid->checkCollision())
     {
 
     }

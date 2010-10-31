@@ -20,8 +20,11 @@ public:
   bool isPaused();
   bool isGameStarted();
   Ball *ball;
+  Paddle *paddle;
   int getGameAreaW();
   int getGameAreaH();
+  bool checkCollision();
+  int hitCount;
 
 protected:
   void paintEvent(QPaintEvent *event);
@@ -34,7 +37,6 @@ protected:
 private:
   int x;
   int timerId;
-  Paddle *paddle;
 
   bool gameOver;
   bool gameWon;
@@ -43,6 +45,7 @@ private:
   QRect rect;
   int gameAreaWidth;
   int gameAreaHeight;
+
 
 };
 
