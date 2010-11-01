@@ -68,13 +68,46 @@ bool Arkanoid::checkCollision()
   else if (floor(ball->nextPosY) >= 500 - 12 && floor(ball->nextPosY) < 500 - 12 + 5)
   {
    hitCount++;
-   if (floor(ball->posX) >= paddle->getPosX() - 40 && floor(ball->posX) <= paddle->getPosX() + 40)
+   if (floor(ball->posX) >= paddle->getPosX() - 40 - 12 && floor(ball->posX) <= paddle->getPosX() + 40)
    {
     if (ball->speedY > 0)
     {
-     ball->speedY = -1 * ball->speedY;
-     ball->posY = floor(ball->nextPosY);
-     ret = true;
+      double dif = paddle->getPosX() - floor(ball->posX) + 6;
+      if (dif > 0) //ball hits left side of paddle
+      {
+        if (dif > 40)
+        {
+          ball->speedX = -1 * ball->getSpeedResultant() / sqrt(1 + pow(tan((90 - 80) / 180 * PI),2));
+          ball->speedY = -1 * sqrt(pow(ball->getSpeedResultant(),2) - pow(ball->speedX,2));
+        }
+        else
+        {
+          ball->speedX = -1 * ball->getSpeedResultant() / sqrt(1 + pow(tan((90 - dif * 2) / 180 * PI),2));
+          ball->speedY = -1 * sqrt(pow(ball->getSpeedResultant(),2) - pow(ball->speedX,2));
+        }
+        ball->posY = floor(ball->nextPosY);
+        ret = true;
+      }
+
+      if (dif < 0) //ball hits right side of paddle
+      {
+        if (dif < -40)
+        {
+          ball->speedX = ball->getSpeedResultant() / sqrt(1 + pow(tan((90 - 80) / 180 * PI),2));
+          ball->speedY = -1 * sqrt(pow(ball->getSpeedResultant(),2) - pow(ball->speedX,2));
+        }
+        else
+        {
+          ball->speedX = ball->getSpeedResultant() / sqrt(1 + pow(tan((90 - qAbs(dif) * 2) / 180 * PI),2));
+          ball->speedY = -1 * sqrt(pow(ball->getSpeedResultant(),2) - pow(ball->speedX,2));
+        }
+      }
+
+      if (dif == 0) //ball hits center of paddle
+      {
+        ball->speedX = 0;
+        ball->speedY = ball->getSpeedResultant();
+      }
     }
    }
   }

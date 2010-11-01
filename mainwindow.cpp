@@ -65,7 +65,7 @@ void mainwindow::mousePressEvent(QMouseEvent *event)
 
 void mainwindow::timerTick()
 {
- this->txt->setText(QString::number(arkanoid->hitCount) + "\n" + QString::number(arkanoid->ball->getPosX()) + "," + QString::number(arkanoid->ball->getPosY()) + "\n" + QString::number(arkanoid->paddle->getPosX()));
+ this->txt->setText(QString::number(arkanoid->hitCount) + "\n" + QString::number(arkanoid->ball->getPosX()) + "," + QString::number(arkanoid->ball->getPosY()) + "\n" + QString::number(arkanoid->ball->getSpeedResultant()));
   //this->txt->setText(QString::number(arkanoid->ball->getPosX()) + "," + QString::number(arkanoid->ball->getPosY()));
 
   if (arkanoid->ball->checkBallPosition())
