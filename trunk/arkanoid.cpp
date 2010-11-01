@@ -77,13 +77,13 @@ bool Arkanoid::checkCollision()
       {
         if (dif > 40)
         {
-          ball->speedX = -1 * ball->getSpeedResultant() / sqrt(1 + pow(tan((90 - 80) / 180 * PI),2));
-          ball->speedY = -1 * sqrt(pow(ball->getSpeedResultant(),2) - pow(ball->speedX,2));
+          ball->speedX = -1 * ball->speedResultant / sqrt(1 + pow(tan((90 - 80) / 180 * PI),2));
+          ball->speedY = -1 * sqrt(pow(ball->speedResultant,2) - pow(ball->speedX,2));
         }
         else
         {
-          ball->speedX = -1 * ball->getSpeedResultant() / sqrt(1 + pow(tan((90 - dif * 2) / 180 * PI),2));
-          ball->speedY = -1 * sqrt(pow(ball->getSpeedResultant(),2) - pow(ball->speedX,2));
+          ball->speedX = -1 * ball->speedResultant / sqrt(1 + pow(tan((90 - dif * 2) / 180 * PI),2));
+          ball->speedY = -1 * sqrt(pow(ball->speedResultant,2) - pow(ball->speedX,2));
         }
         ball->posY = floor(ball->nextPosY);
         ret = true;
@@ -93,20 +93,20 @@ bool Arkanoid::checkCollision()
       {
         if (dif < -40)
         {
-          ball->speedX = ball->getSpeedResultant() / sqrt(1 + pow(tan((90 - 80) / 180 * PI),2));
-          ball->speedY = -1 * sqrt(pow(ball->getSpeedResultant(),2) - pow(ball->speedX,2));
+          ball->speedX = ball->speedResultant / sqrt(1 + pow(tan((90 - 80) / 180 * PI),2));
+          ball->speedY = -1 * sqrt(pow(ball->speedResultant,2) - pow(ball->speedX,2));
         }
         else
         {
-          ball->speedX = ball->getSpeedResultant() / sqrt(1 + pow(tan((90 - qAbs(dif) * 2) / 180 * PI),2));
-          ball->speedY = -1 * sqrt(pow(ball->getSpeedResultant(),2) - pow(ball->speedX,2));
+          ball->speedX = ball->speedResultant / sqrt(1 + pow(tan((90 - qAbs(dif) * 2) / 180 * PI),2));
+          ball->speedY = -1 * sqrt(pow(ball->speedResultant,2) - pow(ball->speedX,2));
         }
       }
 
       if (dif == 0) //ball hits center of paddle
       {
         ball->speedX = 0;
-        ball->speedY = ball->getSpeedResultant();
+        ball->speedY = ball->speedResultant;
       }
     }
    }
