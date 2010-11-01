@@ -25,6 +25,7 @@ public:
   int getGameAreaH();
   bool checkCollision();
   int hitCount;
+  static const double PI = 3.14;
 
 protected:
   void paintEvent(QPaintEvent *event);
