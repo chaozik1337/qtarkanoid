@@ -5,7 +5,8 @@ Ball::Ball()
  image.load("ball.png");
  rect = image.rect();
  this->speedX = 0; //100 pixels per second
- this->speedY = 200;
+ this->speedY = 300;
+ this->speedResultant = sqrt(pow(this->speedX,2) + pow(this->speedY,2));
  this->posX = 300;
  this->posY = 100;
  this->nextPosX = posX;
@@ -16,11 +17,6 @@ Ball::Ball()
 
 Ball::~Ball()
 {
-}
-
-double Ball::getSpeedResultant()
-{
-  return sqrt(pow(this->speedX, 2) + pow(this->speedY, 2));
 }
 
 int Ball::getPosX()

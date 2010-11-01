@@ -23,7 +23,6 @@ public:
   QImage & getImage();
   int getPosX();
   int getPosY();
-  double getSpeedResultant();
   int hitCount;
 
   int posX;
@@ -32,6 +31,7 @@ public:
   double nextPosY;
   double speedX;
   double speedY;
+  double speedResultant;
   bool XChanged;
   bool YChanged;
 
