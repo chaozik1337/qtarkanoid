@@ -6,9 +6,30 @@ mainwindow::mainwindow(QWidget *parent) :
   this->setFixedSize(800, 650);
   arkanoid = new Arkanoid();
   layout = new QHBoxLayout;
+  vlayout = new QVBoxLayout;
   timer = new QTimer(this);
   txt = new QTextEdit(this);
+  LCDScore = new QLCDNumber(this);
+  LCDLives = new QLCDNumber(this);
+  LCDLevel = new QLCDNumber(this);
+  lblScore = new QLabel(this);
+  lblLives = new QLabel(this);
+  lblLevel = new QLabel(this);
 
+  txt->setFixedWidth(100);
+  lblScore->setText("Score");
+  LCDScore->display(100);
+  lblLives->setText("Lives");
+  lblLevel->setText("Level");
+
+  vlayout->addWidget(lblScore);
+  vlayout->addWidget(LCDScore);
+  vlayout->addWidget(lblLives);
+  vlayout->addWidget(LCDLives);
+  vlayout->addWidget(lblLevel);
+  vlayout->addWidget(LCDLevel);
+
+  layout->addLayout(vlayout);
   layout->addWidget(arkanoid);
   layout->addWidget(txt);
   setLayout(layout);
