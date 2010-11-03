@@ -3,9 +3,12 @@
 
 #include <QWidget>
 #include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QTimer>
 #include <QApplication>
 #include <QTextEdit>
+#include <QLCDNumber>
+#include <QLabel>
 #include "arkanoid.h"
 
 class mainwindow : public QWidget
@@ -21,8 +24,16 @@ protected:
 
 private:
   QHBoxLayout *layout;
+  QVBoxLayout *vlayout;
   QTimer *timer;
   QTextEdit *txt;
+  QLCDNumber *LCDScore;
+  QLCDNumber *LCDLives;
+  QLCDNumber *LCDLevel;
+  QLabel *lblScore;
+  QLabel *lblLives;
+  QLabel *lblLevel;
+
 signals:
 
 public slots:
