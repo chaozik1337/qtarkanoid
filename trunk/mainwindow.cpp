@@ -18,9 +18,11 @@ mainwindow::mainwindow(QWidget *parent) :
 
   txt->setFixedWidth(100);
   lblScore->setText("Score");
-  LCDScore->display(100);
+  LCDScore->display(arkanoid->score);
   lblLives->setText("Lives");
+  LCDLives->display(arkanoid->lives);
   lblLevel->setText("Level");
+  LCDLevel->display(arkanoid->level);
 
   vlayout->addWidget(lblScore);
   vlayout->addWidget(LCDScore);
@@ -86,7 +88,10 @@ void mainwindow::mousePressEvent(QMouseEvent *event)
 
 void mainwindow::timerTick()
 {
- this->txt->setText(QString::number(arkanoid->hitCount) + "\n" + QString::number(arkanoid->ball->getPosX()) + "," + QString::number(arkanoid->ball->getPosY()) + "\n" + QString::number(arkanoid->ball->speedResultant));
+  this->txt->setText("X:" + QString::number(arkanoid->ball->speedX));
+  this->txt->setText(this->txt->toPlainText() + "\nY:" + QString::number(arkanoid->ball->speedY));
+  this->txt->setText(this->txt->toPlainText() + "\nRes:" + QString::number(arkanoid->ball->speedResultant));
+  this->txt->setText(this->txt->toPlainText() + "\nAngle:" + QString::number(qAbs(atan(arkanoid->ball->speedX / arkanoid->ball->speedY)) * 180 / arkanoid->PI));
   //this->txt->setText(QString::number(arkanoid->ball->getPosX()) + "," + QString::number(arkanoid->ball->getPosY()));
 
   if (arkanoid->ball->checkBallPosition())

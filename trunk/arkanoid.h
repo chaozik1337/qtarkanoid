@@ -27,13 +27,17 @@ public:
   int hitCount;
   static const double PI = 3.14;
 
+  double score;
+  int lives;
+  int level;
+
 protected:
   void paintEvent(QPaintEvent *event);
   void mouseMoveEvent(QMouseEvent *event);
 
   void victory();
 
-  bool setGameArea(int width, int height);
+  void setGameArea(int width, int height);
 
 private:
   int x;

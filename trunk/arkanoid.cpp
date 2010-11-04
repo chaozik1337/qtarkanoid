@@ -20,6 +20,9 @@ Arkanoid::Arkanoid(QWidget *parent) : QWidget(parent)
  this->setPalette(QPalette(Qt::black));
  this->setAutoFillBackground(true);
  hitCount = 0;
+ this->score = 0;
+ this->lives = 3;
+ this->level = 1;
 }
 
 Arkanoid::~Arkanoid()
@@ -72,17 +75,17 @@ bool Arkanoid::checkCollision()
    {
     if (ball->speedY > 0)
     {
-      double dif = paddle->getPosX() - floor(ball->posX) + 6;
+      double dif = paddle->getPosX() - (floor(ball->posX) + 6.0);
       if (dif > 0) //ball hits left side of paddle
       {
         if (dif > 40)
         {
-          ball->speedX = -1 * ball->speedResultant / sqrt(1 + pow(tan((90 - 80) / 180 * PI),2));
+          ball->speedX = -1 * ball->speedResultant / sqrt(1 + pow(tan((90.0 - 80.0) / 180.0 * PI),2));
           ball->speedY = -1 * sqrt(pow(ball->speedResultant,2) - pow(ball->speedX,2));
         }
         else
         {
-          ball->speedX = -1 * ball->speedResultant / sqrt(1 + pow(tan((90 - dif * 2) / 180 * PI),2));
+          ball->speedX = -1 * ball->speedResultant / sqrt(1 + pow(tan((90.0 - dif * 2.0) / 180.0 * PI),2));
           ball->speedY = -1 * sqrt(pow(ball->speedResultant,2) - pow(ball->speedX,2));
         }
         ball->posY = floor(ball->nextPosY);
@@ -93,12 +96,12 @@ bool Arkanoid::checkCollision()
       {
         if (dif < -40)
         {
-          ball->speedX = ball->speedResultant / sqrt(1 + pow(tan((90 - 80) / 180 * PI),2));
+          ball->speedX = ball->speedResultant / sqrt(1 + pow(tan((90.0 - 80.0) / 180.0 * PI),2));
           ball->speedY = -1 * sqrt(pow(ball->speedResultant,2) - pow(ball->speedX,2));
         }
         else
         {
-          ball->speedX = ball->speedResultant / sqrt(1 + pow(tan((90 - qAbs(dif) * 2) / 180 * PI),2));
+          ball->speedX = ball->speedResultant / sqrt(1 + pow(tan((90.0 - qAbs(dif) * 2) / 180.0 * PI),2));
           ball->speedY = -1 * sqrt(pow(ball->speedResultant,2) - pow(ball->speedX,2));
         }
       }
@@ -140,7 +143,7 @@ int Arkanoid::getGameAreaH()
  return gameAreaHeight;
 }
 
-bool Arkanoid::setGameArea(int width, int height)
+void Arkanoid::setGameArea(int width, int height)
 {
  if (height > 0)
  {
