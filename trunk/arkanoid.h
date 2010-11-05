@@ -3,6 +3,7 @@
 
 #include "paddle.h"
 #include "ball.h"
+#include "block.h"
 #include <QWidget>
 #include <QKeyEvent>
 #include <QPalette>
@@ -21,6 +22,7 @@ public:
   bool isGameStarted();
   Ball *ball;
   Paddle *paddle;
+  Block *block;
   int getGameAreaW();
   int getGameAreaH();
   bool checkCollision();

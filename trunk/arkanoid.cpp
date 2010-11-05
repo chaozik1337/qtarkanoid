@@ -6,12 +6,16 @@
 Arkanoid::Arkanoid(QWidget *parent) : QWidget(parent)
 {
  x = 0;
+ this->score = 0;
+ this->lives = 3;
+ this->level = 1;
  gameOver = FALSE;
  gameWon = FALSE;
  paused = FALSE;
  gameStarted = FALSE;
  paddle = new Paddle();
  ball = new Ball();
+ block = new Block(this, 1, this->level, 0, 0);
  //startGame();
  setWindowTitle("qtArkanoid");
  setMouseTracking(true);
@@ -20,9 +24,6 @@ Arkanoid::Arkanoid(QWidget *parent) : QWidget(parent)
  this->setPalette(QPalette(Qt::black));
  this->setAutoFillBackground(true);
  hitCount = 0;
- this->score = 0;
- this->lives = 3;
- this->level = 1;
 }
 
 Arkanoid::~Arkanoid()
@@ -192,6 +193,7 @@ void Arkanoid::paintEvent(QPaintEvent *event)
  {
   painter.drawImage(paddle->getRect(), paddle->getImage());
   painter.drawImage(ball->getRect(), ball->getImage());
+  painter.drawImage(block->getRect(), block->getImage());
  }
 }
 
