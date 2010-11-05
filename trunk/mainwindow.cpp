@@ -88,11 +88,12 @@ void mainwindow::mousePressEvent(QMouseEvent *event)
 
 void mainwindow::timerTick()
 {
+ /*
   this->txt->setText("X:" + QString::number(arkanoid->ball->speedX));
   this->txt->setText(this->txt->toPlainText() + "\nY:" + QString::number(arkanoid->ball->speedY));
   this->txt->setText(this->txt->toPlainText() + "\nRes:" + QString::number(arkanoid->ball->speedResultant));
   this->txt->setText(this->txt->toPlainText() + "\nAngle:" + QString::number(qAbs(atan(arkanoid->ball->speedX / arkanoid->ball->speedY)) * 180 / arkanoid->PI));
-  //this->txt->setText(QString::number(arkanoid->ball->getPosX()) + "," + QString::number(arkanoid->ball->getPosY()));
+*/
 
   if (arkanoid->ball->checkBallPosition())
   {

@@ -15,7 +15,8 @@ Arkanoid::Arkanoid(QWidget *parent) : QWidget(parent)
  gameStarted = FALSE;
  paddle = new Paddle();
  ball = new Ball();
- block = new Block(this, 1, this->level, 0, 0);
+ //block = new Block(this, 1, this->level, 0, 0);
+ lvl = new Level(this, this->level);
  //startGame();
  setWindowTitle("qtArkanoid");
  setMouseTracking(true);
@@ -37,22 +38,44 @@ bool Arkanoid::checkCollision()
 
  if (ball->XChanged)
  {
-  if (ball->nextPosX > 520 - 11)
+
+  if (ball->nextPosX > 520 - 11) //ball hits right wall
   {
    ball->speedX = -1 * ball->speedX;
    ball->posX = 520 - 11;
    ball->nextPosX = ball->posX;
    ret = true;
   }
-  else if (ball->nextPosX < 0)
+
+  else if (ball->nextPosX < 0) //ball hits left wall
   {
    ball->speedX = -1 * ball->speedX;
    ball->posX = 0;
    ball->nextPosX = ball->posX;
    ret = true;
   }
-  else
+
+  else //ball doesn't hit walls
   {
+   for (int n = 0; n < this->lvl->blocks.count(); n++)
+   {
+    if (floor(this->ball->nextPosX) >= this->lvl->blocks[n]->x1 && floor(this->ball->nextPosX) <= this->lvl->blocks[n]->x2)
+    {
+     if (floor(this->ball->posY) <= this->lvl->blocks[n]->y2 && floor(this->ball->posY) >= this->lvl->blocks[n]->y1)
+     {
+      this->lvl->blocks.removeAt(n);
+      if (this->lvl->blocks.count() == 0)
+      {
+       this->victory();
+      }
+      else
+      {
+       this->ball->speedX = -1 * this->ball->speedX;
+       this->ball->posX = floor(ball->nextPosX);
+      }
+     }
+    }
+   }
    ball->posX = floor(ball->nextPosX);
   }
  }
@@ -127,6 +150,25 @@ bool Arkanoid::checkCollision()
 
   else
   {
+   for (int n = 0; n < this->lvl->blocks.count(); n++)
+   {
+    if (floor(this->ball->posX) >= this->lvl->blocks[n]->x1 && floor(this->ball->posX) <= this->lvl->blocks[n]->x2)
+    {
+     if (floor(this->ball->nextPosY) <= this->lvl->blocks[n]->y2 && floor(this->ball->nextPosY) >= this->lvl->blocks[n]->y1)
+     {
+      this->lvl->blocks.removeAt(n);
+      if (this->lvl->blocks.count() == 0)
+      {
+       this->victory();
+      }
+      else
+      {
+       this->ball->speedY = -1 * this->ball->speedY;
+       this->ball->posY = floor(this->ball->nextPosY);
+      }
+     }
+    }
+   }
    ball->posY = floor(ball->nextPosY);
   }
  }
@@ -193,7 +235,11 @@ void Arkanoid::paintEvent(QPaintEvent *event)
  {
   painter.drawImage(paddle->getRect(), paddle->getImage());
   painter.drawImage(ball->getRect(), ball->getImage());
-  painter.drawImage(block->getRect(), block->getImage());
+  //painter.drawImage(block->getRect(), block->getImage());
+  for (int n = 0; n < this->lvl->blocks.count(); n++)
+  {
+   painter.drawImage(this->lvl->blocks[n]->getRect(), this->lvl->blocks[n]->getImage());
+  }
  }
 }
 
