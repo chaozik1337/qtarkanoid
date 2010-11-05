@@ -13,16 +13,19 @@ public:
     ~Block();
     QRect getRect();
     QImage & getImage();
-    int posX;
-    int posY;
+    int x1;
+    int x2;
+    int y1;
+    int y2;
     int hitsNeeded;
     double score;
     int blockNum;
     QString color;
-
-private:
     QImage image;
     QRect rect;
+
+private:
+
 
 signals:
 

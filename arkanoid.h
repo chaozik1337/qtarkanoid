@@ -3,7 +3,8 @@
 
 #include "paddle.h"
 #include "ball.h"
-#include "block.h"
+//#include "block.h"
+#include "level.h"
 #include <QWidget>
 #include <QKeyEvent>
 #include <QPalette>
@@ -23,6 +24,7 @@ public:
   Ball *ball;
   Paddle *paddle;
   Block *block;
+  Level *lvl;
   int getGameAreaW();
   int getGameAreaH();
   bool checkCollision();
