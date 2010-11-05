@@ -4,11 +4,11 @@ Ball::Ball()
 {
  image.load("ball.png");
  rect = image.rect();
- this->speedX = 0; //100 pixels per second
- this->speedY = 300;
+ this->speedX = 100; //100 pixels per second
+ this->speedY = -300;
  this->speedResultant = sqrt(pow(this->speedX,2) + pow(this->speedY,2));
  this->posX = 300;
- this->posY = 100;
+ this->posY = 450;
  this->nextPosX = posX;
  this->nextPosY = posY;
  this->hitCount = 0;
@@ -28,67 +28,6 @@ int Ball::getPosY()
 {
  return posY;
 }
-
-/*
-bool Ball::checkCollisions()
-{
- bool ret = false;
- if (XChanged)
- {
-  if (this->nextPosX > 520 - 11)
-  {
-   this->speedX = -1 * this->speedX;
-   this->posX = 520 - 11;
-   this->nextPosX = this->posX;
-   ret = true;
-  }
-  else if (this->nextPosX < 0)
-  {
-   this->speedX = -1 * this->speedX;
-   this->posX = 0;
-   this->nextPosX = this->posX;
-   ret = true;
-  }
-  else
-  {
-   this->posX = floor(this->nextPosX);
-  }
- }
-
- if (YChanged)
- {
-  //check if ball hit top
-  if (this->nextPosY < 0)
-  {
-   this->speedY = -1 * this->speedY;
-   this->posY = 0;
-   this->nextPosY = this->posY;
-   ret = true;
-  }
-  else if (floor(this->nextPosY) >= 480 || floor(this->nextPosY) < 485)
-  {
-   if (floor(this->posX) == 1)
-   {
-
-   }
-  }
-
-  else if (this->nextPosY > 600 - 12)
-  {
-   this->speedY = -1 * this->speedY;
-   this->posY = 600 - 12;
-   this->nextPosY = this->posY;
-   ret = true;
-  }
-  else
-  {
-   this->posY = floor(this->nextPosY);
-  }
- }
-
- return ret;
-}
-*/
 
 bool Ball::checkBallPosition()
 {
