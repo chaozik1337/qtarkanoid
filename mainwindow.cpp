@@ -99,7 +99,7 @@ void mainwindow::timerTick()
   {
     if (arkanoid->checkCollision())
     {
-
+     this->LCDScore->display(arkanoid->score);
     }
     //ball->moveBall(pos.x(), pos.y(), gameAreaWidth, gameAreaHeight);
     arkanoid->ball->moveBall(arkanoid->ball->getPosX(), arkanoid->ball->getPosY(), arkanoid->getGameAreaW(), arkanoid->getGameAreaH());

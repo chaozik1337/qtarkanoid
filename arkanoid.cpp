@@ -63,8 +63,7 @@ bool Arkanoid::checkCollision()
     {
      if (floor(this->ball->posY) <= this->lvl->blocks[n]->y2 && floor(this->ball->posY) >= this->lvl->blocks[n]->y1)
      {
-      this->lvl->blocks.removeAt(n);
-      if (this->lvl->blocks.count() == 0)
+      if (checkVictory(n))
       {
        this->victory();
       }
@@ -73,6 +72,7 @@ bool Arkanoid::checkCollision()
        this->ball->speedX = -1 * this->ball->speedX;
        this->ball->posX = floor(ball->nextPosX);
       }
+      ret = true;
      }
     }
    }
@@ -156,8 +156,7 @@ bool Arkanoid::checkCollision()
     {
      if (floor(this->ball->nextPosY) <= this->lvl->blocks[n]->y2 && floor(this->ball->nextPosY) >= this->lvl->blocks[n]->y1)
      {
-      this->lvl->blocks.removeAt(n);
-      if (this->lvl->blocks.count() == 0)
+      if (checkVictory(n))
       {
        this->victory();
       }
@@ -166,6 +165,7 @@ bool Arkanoid::checkCollision()
        this->ball->speedY = -1 * this->ball->speedY;
        this->ball->posY = floor(this->ball->nextPosY);
       }
+      ret = true;
      }
     }
    }
@@ -174,6 +174,17 @@ bool Arkanoid::checkCollision()
  }
 
  return ret;
+}
+
+bool Arkanoid::checkVictory(int n)
+{
+ this->lvl->blocks.removeAt(n);
+ this->score = this->score + this->lvl->blocks[n]->score;
+ if (this->lvl->blocks.count() == 0)
+ {
+  return true;
+ }
+ return false;
 }
 
 int Arkanoid::getGameAreaW()
