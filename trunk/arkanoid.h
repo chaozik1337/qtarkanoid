@@ -30,6 +30,7 @@ public:
   bool checkCollision();
   int hitCount;
   static const double PI = 3.14;
+  bool checkVictory(int n);
 
   double score;
   int lives;

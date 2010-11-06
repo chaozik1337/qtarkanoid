@@ -58,8 +58,8 @@ Block::Block(QWidget *parent, int num, int lvl, int posX, int posY) :
   }
 
   rect = image.rect();
-  this->x1 = posX;
-  this->y1 = posY;
+  this->x1 = posX * 40;
+  this->y1 = posY * 20;
   this->x2 = this->x1 + this->getRect().width();
   this->y2 = this->y1 + this->getRect().height();
   rect.moveTo(this->x1, this->y1);
