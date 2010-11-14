@@ -8,7 +8,7 @@ mainwindow::mainwindow(QWidget *parent) :
   layout = new QHBoxLayout;
   vlayout = new QVBoxLayout;
   timer = new QTimer(this);
-  txt = new QTextEdit(this);
+  //txt = new QTextEdit(this);
   LCDScore = new QLCDNumber(this);
   LCDLives = new QLCDNumber(this);
   LCDLevel = new QLCDNumber(this);
@@ -16,7 +16,7 @@ mainwindow::mainwindow(QWidget *parent) :
   lblLives = new QLabel(this);
   lblLevel = new QLabel(this);
 
-  txt->setFixedWidth(100);
+  //txt->setFixedWidth(100);
   lblScore->setText("Score");
   LCDScore->display(arkanoid->score);
   lblLives->setText("Lives");
@@ -33,7 +33,7 @@ mainwindow::mainwindow(QWidget *parent) :
 
   layout->addLayout(vlayout);
   layout->addWidget(arkanoid);
-  layout->addWidget(txt);
+  //layout->addWidget(txt);
   setLayout(layout);
 
   connect(timer,SIGNAL(timeout()), this, SLOT(timerTick()));
@@ -88,21 +88,24 @@ void mainwindow::mousePressEvent(QMouseEvent *event)
 
 void mainwindow::timerTick()
 {
- /*
+  /*
   this->txt->setText("X:" + QString::number(arkanoid->ball->speedX));
   this->txt->setText(this->txt->toPlainText() + "\nY:" + QString::number(arkanoid->ball->speedY));
   this->txt->setText(this->txt->toPlainText() + "\nRes:" + QString::number(arkanoid->ball->speedResultant));
   this->txt->setText(this->txt->toPlainText() + "\nAngle:" + QString::number(qAbs(atan(arkanoid->ball->speedX / arkanoid->ball->speedY)) * 180 / arkanoid->PI));
 */
-
-  if (arkanoid->ball->checkBallPosition())
+  if (!arkanoid->isPaused())
   {
-    if (arkanoid->checkCollision())
+    if (arkanoid->ball->checkBallPosition())
     {
-     this->LCDScore->display(arkanoid->score);
+      if (arkanoid->checkCollision())
+      {
+        this->LCDScore->display(arkanoid->score);
+        this->LCDLives->display(arkanoid->lives);
+      }
+      //ball->moveBall(pos.x(), pos.y(), gameAreaWidth, gameAreaHeight);
+      arkanoid->ball->moveBall(arkanoid->ball->getPosX(), arkanoid->ball->getPosY(), arkanoid->getGameAreaW(), arkanoid->getGameAreaH());
+      arkanoid->repaint();
     }
-    //ball->moveBall(pos.x(), pos.y(), gameAreaWidth, gameAreaHeight);
-    arkanoid->ball->moveBall(arkanoid->ball->getPosX(), arkanoid->ball->getPosY(), arkanoid->getGameAreaW(), arkanoid->getGameAreaH());
-    arkanoid->repaint();
   }
 }
