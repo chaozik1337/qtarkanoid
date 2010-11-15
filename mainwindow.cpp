@@ -94,7 +94,7 @@ void mainwindow::timerTick()
   this->txt->setText(this->txt->toPlainText() + "\nRes:" + QString::number(arkanoid->ball->speedResultant));
   this->txt->setText(this->txt->toPlainText() + "\nAngle:" + QString::number(qAbs(atan(arkanoid->ball->speedX / arkanoid->ball->speedY)) * 180 / arkanoid->PI));
 */
-  if (!arkanoid->isPaused())
+  if (!arkanoid->isPaused() && arkanoid->gameStarted)
   {
     if (arkanoid->ball->checkBallPosition())
     {

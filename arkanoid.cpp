@@ -183,22 +183,48 @@ bool Arkanoid::checkCollision()
     {
       for (int n = 0; n < this->lvl->blocks.count(); n++)
       {
+        bool XHit = false;
+        if (this->ball->speedX < 0) //ball is going left
+        {
+          if (floor(this->ball->posX) >= this->lvl->blocks[n]->x1 && floor(this->ball->posX) <= this->lvl->blocks[n]->x2)
+            XHit = true;
+        }
+        else //ball is going right
+        {
+          if (floor(this->ball->posX) + 12 >= this->lvl->blocks[n]->x1 && floor(this->ball->posX) <= this->lvl->blocks[n]->x2)
+            XHit = true;
+        }
+
         if (floor(this->ball->posX) >= this->lvl->blocks[n]->x1 && floor(this->ball->posX) <= this->lvl->blocks[n]->x2)
         {
-          if (floor(this->ball->nextPosY) <= this->lvl->blocks[n]->y2 && floor(this->ball->nextPosY) >= this->lvl->blocks[n]->y1)
-          {
-            if (checkVictory(n))
-            {
-              this->victory();
-            }
-            else
-            {
-              this->ball->speedY = -1 * this->ball->speedY;
-              this->ball->posY = floor(this->ball->nextPosY);
-            }
-            ret = true;
-          }
         }
+
+        bool YHit = false;
+        if (this->ball->speedY < 0) //ball is going upwards
+        {
+          if (floor(this->ball->nextPosY) <= this->lvl->blocks[n]->y2 && floor(this->ball->nextPosY) >= this->lvl->blocks[n]->y1)
+            YHit = true;
+        }
+        else //ball is going downwards
+        {
+          if (floor(this->ball->nextPosY + 12) <= this->lvl->blocks[n]->y2 && floor(this->ball->nextPosY + 12) >= this->lvl->blocks[n]->y1)
+            YHit = true;
+        }
+
+        if (XHit && YHit)
+        {
+          if (checkVictory(n))
+          {
+            this->victory();
+          }
+          else
+          {
+            this->ball->speedY = -1 * this->ball->speedY;
+            this->ball->posY = floor(this->ball->nextPosY);
+          }
+          ret = true;
+        }
+
       }
       ball->posY = floor(ball->nextPosY);
     }
