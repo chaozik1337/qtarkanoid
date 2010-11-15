@@ -31,7 +31,7 @@ public:
   int hitCount;
   static const double PI = 3.14;
   bool checkVictory(int n);
-
+  bool gameStarted;
   double score;
   int lives;
   int level;
@@ -50,7 +50,6 @@ private:
 
   bool gameOver;
   bool gameWon;
-  bool gameStarted;
   bool paused;
   QRect rect;
   int gameAreaWidth;
