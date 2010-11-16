@@ -20,7 +20,7 @@ Arkanoid::Arkanoid(QWidget *parent) : QWidget(parent)
   //startGame();
   setWindowTitle("qtArkanoid");
   setMouseTracking(true);
-  setGameArea(520, 600);
+  setGameArea(440, 570);
   this->setFixedSize(gameAreaWidth, gameAreaHeight);
   this->setPalette(QPalette(Qt::black));
   this->setAutoFillBackground(true);
@@ -39,10 +39,10 @@ bool Arkanoid::checkCollision()
   if (ball->XChanged)
   {
 
-    if (ball->nextPosX > 520 - 11) //ball hits right wall
+    if (ball->nextPosX > 440 - 11) //ball hits right wall
     {
       ball->speedX = -1 * ball->speedX;
-      ball->posX = 520 - 11;
+      ball->posX = 440 - 11;
       ball->nextPosX = ball->posX;
       ret = true;
     }
@@ -164,7 +164,7 @@ bool Arkanoid::checkCollision()
     }
 
     //testing only
-    else if (ball->nextPosY > 600 - 12)
+    else if (ball->nextPosY > 570 - 12)
     {
       lives = lives - 1;
       if (lives == 0)
@@ -172,7 +172,7 @@ bool Arkanoid::checkCollision()
         this->stopGame();
       }
       ball->speedY = -1 * ball->speedY;
-      ball->posY = 600 - 12;
+      ball->posY = 570 - 12;
       ball->nextPosY = ball->posY;
       ret = true;
     }
