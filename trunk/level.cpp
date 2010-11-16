@@ -4,23 +4,19 @@ Level::Level(QWidget *parent, int num) :
     QWidget(parent)
 {
  this->num = num;
- //blocks = new QList<Block>;
+ int cols = 11;
  switch (this->num)
  {
  case 1:
-  blocks.append(new Block::Block(0, 1, this->num, 0, 5));
-  blocks.append(new Block::Block(0, 2, this->num, 1, 5));
-  blocks.append(new Block::Block(0, 1, this->num, 2, 5));
-  blocks.append(new Block::Block(0, 2, this->num, 3, 5));
-  blocks.append(new Block::Block(0, 1, this->num, 4, 5));
-  blocks.append(new Block::Block(0, 2, this->num, 5, 5));
-  blocks.append(new Block::Block(0, 1, this->num, 6, 5));
-  blocks.append(new Block::Block(0, 2, this->num, 7, 5));
-  blocks.append(new Block::Block(0, 1, this->num, 8, 5));
-  blocks.append(new Block::Block(0, 2, this->num, 9, 5));
-  blocks.append(new Block::Block(0, 1, this->num, 10, 5));
-  blocks.append(new Block::Block(0, 2, this->num, 11, 5));
-  blocks.append(new Block::Block(0, 1, this->num, 12, 5));
+   for (int n = 0; n < cols; n++)
+   {
+     blocks.append(new Block::Block(0, SILVER2, 1, this->num, n, 5));
+     blocks.append(new Block::Block(0, RED, 1, this->num, n, 6));
+     blocks.append(new Block::Block(0, BLUE, 1, this->num, n, 7));
+     blocks.append(new Block::Block(0, YELLOW, 1, this->num, n, 8));
+     blocks.append(new Block::Block(0, PINK, 1, this->num, n, 9));
+     blocks.append(new Block::Block(0, GREEN, 1, this->num, n, 10));
+   }
   break;
  case 2:
   break;

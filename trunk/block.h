@@ -9,7 +9,7 @@ class Block : public QWidget
 {
     Q_OBJECT
 public:
-    explicit Block(QWidget *parent = 0, int num = 1, int lvl = 1, int posX = 0, int posY = 0);
+    explicit Block(QWidget *parent = 0, int num = 1, int hitsNeeded = 1, int lvl = 1, int posX = 0, int posY = 0);
     ~Block();
     QRect getRect();
     QImage & getImage();

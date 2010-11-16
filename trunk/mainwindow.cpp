@@ -3,7 +3,7 @@
 mainwindow::mainwindow(QWidget *parent) :
     QWidget(parent)
 {
-  this->setFixedSize(800, 650);
+  this->setFixedSize(700, 600);
   arkanoid = new Arkanoid();
   layout = new QHBoxLayout;
   vlayout = new QVBoxLayout;
