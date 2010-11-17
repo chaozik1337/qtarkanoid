@@ -302,7 +302,7 @@ void Arkanoid::paintEvent(QPaintEvent *event)
   else if(!paused)
   {
     painter.drawImage(paddle->getRect(), paddle->getImage());
-    painter.drawImage(ball->getRect(), ball->getImage());
+    painter.drawImage(ball->posX, ball->posY, ball->getImage());
     //painter.drawImage(block->getRect(), block->getImage());
     for (int n = 0; n < this->lvl->blocks.count(); n++)
     {

@@ -7,8 +7,8 @@ Ball::Ball()
  this->speedX = 100; //100 pixels per second
  this->speedY = -300;
  this->speedResultant = sqrt(pow(this->speedX,2) + pow(this->speedY,2));
- this->posX = 300;
- this->posY = 450;
+ this->posX = 0;//300;
+ this->posY = 0;//450;
  this->nextPosX = posX;
  this->nextPosY = posY;
  this->hitCount = 0;
@@ -19,23 +19,12 @@ Ball::~Ball()
 {
 }
 
-int Ball::getPosX()
-{
- return posX;
-}
-
-int Ball::getPosY()
-{
- return posY;
-}
-
 bool Ball::checkBallPosition()
 {
  this->XChanged = false;
  this->YChanged = false;
  this->nextPosX = this->nextPosX + (this->speedX / 1000 * 10);
  this->nextPosY = this->nextPosY + (this->speedY / 1000 * 10);
-
 
  //check if posX has changed
  if (qAbs(floor(this->nextPosX)) != qAbs(this->posX))

@@ -20,8 +20,6 @@ public:
   bool checkBallPosition();
   QRect getRect();
   QImage & getImage();
-  int getPosX();
-  int getPosY();
   int hitCount;
 
   int posX;
