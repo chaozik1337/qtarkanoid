@@ -4,11 +4,11 @@ Ball::Ball()
 {
  image.load("ball.png");
  rect = image.rect();
- this->speedX = 100; //100 pixels per second
- this->speedY = -300;
+ this->speedX = -10; //100 pixels per second
+ this->speedY = 0;
  this->speedResultant = sqrt(pow(this->speedX,2) + pow(this->speedY,2));
- this->posX = 0;//300;
- this->posY = 0;//450;
+ this->posX = 20;//300;
+ this->posY = 7;//450;
  this->nextPosX = posX;
  this->nextPosY = posY;
  this->hitCount = 0;

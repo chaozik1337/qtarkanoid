@@ -39,18 +39,18 @@ bool Arkanoid::checkCollision()
   if (ball->XChanged)
   {
 
-    if (ball->nextPosX > 440 - 11) //ball hits right wall
+    if (ball->nextPosX > gameAreaWidth - 6) //ball hits right wall
     {
       ball->speedX = -1 * ball->speedX;
-      ball->posX = 440 - 11;
+      ball->posX = gameAreaWidth - 6;
       ball->nextPosX = ball->posX;
       ret = true;
     }
 
-    else if (ball->nextPosX < 0) //ball hits left wall
+    else if (ball->nextPosX < 6) //ball hits left wall
     {
       ball->speedX = -1 * ball->speedX;
-      ball->posX = 0;
+      ball->posX = 6;
       ball->nextPosX = ball->posX;
       ret = true;
     }
@@ -63,40 +63,36 @@ bool Arkanoid::checkCollision()
         bool XHit = false;
         if (this->ball->speedX < 0) //ball is going left
         {
-          if (floor(this->ball->nextPosX) >= this->lvl->blocks[n]->x1 && floor(this->ball->nextPosX) <= this->lvl->blocks[n]->x2)
+          if (floor(this->ball->nextPosX) - 6 >= this->lvl->blocks[n]->x1 && floor(this->ball->nextPosX) - 6 <= this->lvl->blocks[n]->x2)
             XHit = true;
         }
         else //ball is going right
         {
-          if (floor(this->ball->nextPosX + 12) >= this->lvl->blocks[n]->x1 && floor(this->ball->nextPosX) <= this->lvl->blocks[n]->x2)
+          if (floor(this->ball->nextPosX) + 6 >= this->lvl->blocks[n]->x1 && floor(this->ball->nextPosX) + 6 <= this->lvl->blocks[n]->x2)
             XHit = true;
         }
 
-        //check if ball posY is between y1 and y2 coordinates
-        bool YHit = false;
-        if (this->ball->speedY < 0) //ball is going upwards
+        if (XHit)
         {
-          if (floor(this->ball->posY) <= this->lvl->blocks[n]->y2 && floor(this->ball->posY) >= this->lvl->blocks[n]->y1)
-            YHit = true;
-        }
-        else //ball is going downwards
-        {
-          if (floor(this->ball->posY) + 12 <= this->lvl->blocks[n]->y2 && floor(this->ball->posY) + 12 >= this->lvl->blocks[n]->y1)
-            YHit = true;
-        }
+          //check if ball posY is between y1 and y2 coordinates
+          bool YHit = false;
 
-        if (XHit && YHit)
-        {
-          if (checkVictory(n))
+          if (floor(this->ball->posY) <= this->lvl->blocks[n]->y2 + 6 && floor(this->ball->posY) >= this->lvl->blocks[n]->y1 - 6)
+            YHit = true;
+
+          if (XHit && YHit)
           {
-            this->victory();
+            if (checkVictory(n))
+            {
+              this->victory();
+            }
+            else
+            {
+              this->ball->speedX = -1 * this->ball->speedX;
+              this->ball->posX = floor(ball->nextPosX);
+            }
+            ret = true;
           }
-          else
-          {
-            this->ball->speedX = -1 * this->ball->speedX;
-            this->ball->posX = floor(ball->nextPosX);
-          }
-          ret = true;
         }
 
       }
@@ -107,15 +103,16 @@ bool Arkanoid::checkCollision()
   if (ball->YChanged)
   {
     //check if ball hit top
-    if (ball->nextPosY < 0)
+    if (ball->nextPosY < 6)
     {
       ball->speedY = -1 * ball->speedY;
-      ball->posY = 0;
+      ball->posY = 6;
       ball->nextPosY = ball->posY;
       ret = true;
     }
 
     //if ball hit paddle
+    //hoplaa
     else if (floor(ball->nextPosY) >= 500 - 12 && floor(ball->nextPosY) < 500 - 12 + 5)
     {
       hitCount++;
@@ -302,7 +299,7 @@ void Arkanoid::paintEvent(QPaintEvent *event)
   else if(!paused)
   {
     painter.drawImage(paddle->getRect(), paddle->getImage());
-    painter.drawImage(ball->posX, ball->posY, ball->getImage());
+    painter.drawImage(ball->posX - 6, ball->posY - 6, ball->getImage());
     //painter.drawImage(block->getRect(), block->getImage());
     for (int n = 0; n < this->lvl->blocks.count(); n++)
     {
