@@ -103,8 +103,7 @@ void mainwindow::timerTick()
         this->LCDScore->display(arkanoid->score);
         this->LCDLives->display(arkanoid->lives);
       }
-      //ball->moveBall(pos.x(), pos.y(), gameAreaWidth, gameAreaHeight);
-      arkanoid->ball->moveBall(arkanoid->ball->getPosX(), arkanoid->ball->getPosY(), arkanoid->getGameAreaW(), arkanoid->getGameAreaH());
+      arkanoid->ball->moveBall(arkanoid->ball->posX, arkanoid->ball->posY, arkanoid->getGameAreaW(), arkanoid->getGameAreaH());
       arkanoid->repaint();
     }
   }
