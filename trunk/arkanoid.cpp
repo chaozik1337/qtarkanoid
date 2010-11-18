@@ -82,15 +82,21 @@ bool Arkanoid::checkCollision()
 
           if (XHit && YHit)
           {
+            if (this->ball->speedX > 0)
+            {
+              this->ball->posX = this->lvl->blocks[n]->x1;
+            }
+            else
+            {
+              this->ball->posX = this->lvl->blocks[n]->x2;
+            }
+            this->ball->speedX = -1 * this->ball->speedX;
+
             if (checkVictory(n))
             {
               this->victory();
             }
-            else
-            {
-              this->ball->speedX = -1 * this->ball->speedX;
-              this->ball->posX = floor(ball->nextPosX);
-            }
+
             ret = true;
           }
         }
@@ -112,15 +118,14 @@ bool Arkanoid::checkCollision()
     }
 
     //if ball hit paddle
-    //hoplaa
-    else if (floor(ball->nextPosY) >= 500 - 12 && floor(ball->nextPosY) < 500 - 12 + 5)
+    else if (floor(ball->nextPosY) >= 500 - 6 && floor(ball->nextPosY) < 500 - 6 + 5)
     {
       hitCount++;
-      if (floor(ball->posX) >= paddle->getPosX() - 40 - 12 && floor(ball->posX) <= paddle->getPosX() + 40)
+      if (floor(ball->posX) >= paddle->getPosX() - 40 - 6 && floor(ball->posX) <= paddle->getPosX() + 40 + 6)
       {
         if (ball->speedY > 0)
         {
-          double dif = paddle->getPosX() - (floor(ball->posX) + 6.0);
+          double dif = paddle->getPosX() - floor(ball->posX);
           if (dif > 0) //ball hits left side of paddle
           {
             if (dif > 40)
@@ -161,7 +166,7 @@ bool Arkanoid::checkCollision()
     }
 
     //testing only
-    else if (ball->nextPosY > 570 - 12)
+    else if (ball->nextPosY > 570 - 6)
     {
       lives = lives - 1;
       if (lives == 0)
@@ -169,7 +174,7 @@ bool Arkanoid::checkCollision()
         this->stopGame();
       }
       ball->speedY = -1 * ball->speedY;
-      ball->posY = 570 - 12;
+      ball->posY = 570 - 6;
       ball->nextPosY = ball->posY;
       ret = true;
     }
@@ -181,47 +186,37 @@ bool Arkanoid::checkCollision()
       for (int n = 0; n < this->lvl->blocks.count(); n++)
       {
         bool XHit = false;
-        if (this->ball->speedX < 0) //ball is going left
-        {
-          if (floor(this->ball->posX) >= this->lvl->blocks[n]->x1 && floor(this->ball->posX) <= this->lvl->blocks[n]->x2)
-            XHit = true;
-        }
-        else //ball is going right
-        {
-          if (floor(this->ball->posX) + 12 >= this->lvl->blocks[n]->x1 && floor(this->ball->posX) <= this->lvl->blocks[n]->x2)
-            XHit = true;
-        }
 
-        if (floor(this->ball->posX) >= this->lvl->blocks[n]->x1 && floor(this->ball->posX) <= this->lvl->blocks[n]->x2)
-        {
-        }
+        if (floor(this->ball->posX) >= this->lvl->blocks[n]->x1 - 6 && floor(this->ball->posX) <= this->lvl->blocks[n]->x2 + 6)
+          XHit = true;
 
-        bool YHit = false;
-        if (this->ball->speedY < 0) //ball is going upwards
+        if (XHit)
         {
-          if (floor(this->ball->nextPosY) <= this->lvl->blocks[n]->y2 && floor(this->ball->nextPosY) >= this->lvl->blocks[n]->y1)
+          bool YHit = false;
+
+          if (floor(this->ball->nextPosY) <= this->lvl->blocks[n]->y2 + 6 && floor(this->ball->nextPosY) >= this->lvl->blocks[n]->y1 - 6)
             YHit = true;
-        }
-        else //ball is going downwards
-        {
-          if (floor(this->ball->nextPosY + 12) <= this->lvl->blocks[n]->y2 && floor(this->ball->nextPosY + 12) >= this->lvl->blocks[n]->y1)
-            YHit = true;
-        }
 
-        if (XHit && YHit)
-        {
-          if (checkVictory(n))
+          if (XHit && YHit)
           {
-            this->victory();
-          }
-          else
-          {
+            if (this->ball->speedY > 0)
+            {
+              this->ball->posY = this->lvl->blocks[n]->y1;
+            }
+            else
+            {
+              this->ball->posY = this->lvl->blocks[n]->y2;
+            }
             this->ball->speedY = -1 * this->ball->speedY;
-            this->ball->posY = floor(this->ball->nextPosY);
-          }
-          ret = true;
-        }
 
+            if (checkVictory(n))
+            {
+              this->victory();
+            }
+
+            ret = true;
+          }
+        }
       }
       ball->posY = floor(ball->nextPosY);
     }
