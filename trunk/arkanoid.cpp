@@ -57,52 +57,7 @@ bool Arkanoid::checkCollision()
 
     else //ball doesn't hit walls
     {
-      for (int n = 0; n < this->lvl->blocks.count(); n++) //loop all remaining blocks for hit
-      {
-        //check if ball nextPosX is between blocks x1 and x2 coordinates
-        bool XHit = false;
-        if (this->ball->speedX < 0) //ball is going left
-        {
-          if (floor(this->ball->nextPosX) - 6 >= this->lvl->blocks[n]->x1 && floor(this->ball->nextPosX) - 6 <= this->lvl->blocks[n]->x2)
-            XHit = true;
-        }
-        else //ball is going right
-        {
-          if (floor(this->ball->nextPosX) + 6 >= this->lvl->blocks[n]->x1 && floor(this->ball->nextPosX) + 6 <= this->lvl->blocks[n]->x2)
-            XHit = true;
-        }
-
-        if (XHit)
-        {
-          //check if ball posY is between y1 and y2 coordinates
-          bool YHit = false;
-
-          if (floor(this->ball->posY) <= this->lvl->blocks[n]->y2 + 6 && floor(this->ball->posY) >= this->lvl->blocks[n]->y1 - 6)
-            YHit = true;
-
-          if (XHit && YHit)
-          {
-            if (this->ball->speedX > 0)
-            {
-              this->ball->posX = this->lvl->blocks[n]->x1;
-            }
-            else
-            {
-              this->ball->posX = this->lvl->blocks[n]->x2;
-            }
-            this->ball->speedX = -1 * this->ball->speedX;
-
-            if (checkVictory(n))
-            {
-              this->victory();
-            }
-
-            ret = true;
-          }
-        }
-
-      }
-      ball->posX = floor(ball->nextPosX);
+      ret = checkBlockCollision(true);
     }
   }
 
@@ -180,45 +135,108 @@ bool Arkanoid::checkCollision()
     }
 
     //check if ball hits blocks
-    //hoplaa
     else
     {
-      for (int n = 0; n < this->lvl->blocks.count(); n++)
+      ret = checkBlockCollision(false);
+    }
+  }
+
+  return ret;
+}
+
+bool Arkanoid::checkBlockCollision(bool X)
+{
+  int closestBlock = -1;
+  int smallestDif = 100;
+  int dif = -1;
+  bool ret = false;
+
+  if (!X) //Y
+  {
+    for (int n = 0; n < lvl->blocks.count(); n++)
+    {
+      dif = -1;
+      if (floor(ball->posX) >= lvl->blocks[n]->x1 - 6 && floor(ball->posX) <= lvl->blocks[n]->x2 + 6)
       {
-        bool XHit = false;
-
-        if (floor(this->ball->posX) >= this->lvl->blocks[n]->x1 - 6 && floor(this->ball->posX) <= this->lvl->blocks[n]->x2 + 6)
-          XHit = true;
-
-        if (XHit)
+        if (floor(ball->nextPosY) <= lvl->blocks[n]->y2 + 6 && floor(ball->nextPosY) >= lvl->blocks[n]->y1 - 6)
         {
-          bool YHit = false;
-
-          if (floor(this->ball->nextPosY) <= this->lvl->blocks[n]->y2 + 6 && floor(this->ball->nextPosY) >= this->lvl->blocks[n]->y1 - 6)
-            YHit = true;
-
-          if (XHit && YHit)
+          dif = qAbs(lvl->blocks[n]->x1 + 20 - ball->posX);
+          if (dif < smallestDif)
           {
-            if (this->ball->speedY > 0)
-            {
-              this->ball->posY = this->lvl->blocks[n]->y1;
-            }
-            else
-            {
-              this->ball->posY = this->lvl->blocks[n]->y2;
-            }
-            this->ball->speedY = -1 * this->ball->speedY;
-
-            if (checkVictory(n))
-            {
-              this->victory();
-            }
-
-            ret = true;
+            smallestDif = dif;
+            closestBlock = n;
           }
         }
       }
+    }
+
+    if (closestBlock != -1)
+    {
+      if (ball->speedY > 0)
+      {
+        ball->posY = lvl->blocks[closestBlock]->y1 - 6;
+      }
+      else
+      {
+        ball->posY = lvl->blocks[closestBlock]->y2 + 6;
+      }
+      ball->speedY = -1 * ball->speedY;
+      ball->nextPosY = ball->posY;
+
+      if (checkVictory(closestBlock))
+      {
+        victory();
+      }
+      ret = true;
+    }
+    else
+    {
       ball->posY = floor(ball->nextPosY);
+    }
+  }
+
+
+  else //X
+  {
+    for (int n = 0; n < lvl->blocks.count(); n++)
+    {
+      dif = -1;
+      if (floor(ball->nextPosX) >= lvl->blocks[n]->x1 - 6 && floor(ball->nextPosX) <= lvl->blocks[n]->x2 + 6)
+      {
+        if (floor(ball->posY) <= lvl->blocks[n]->y2 + 6 && floor(ball->posY) >= lvl->blocks[n]->y1 - 6)
+        {
+          dif = qAbs(lvl->blocks[n]->x1 + 20 - ball->posX);
+          if (dif < smallestDif)
+          {
+            smallestDif = dif;
+            closestBlock = n;
+          }
+        }
+      }
+    }
+
+    if (closestBlock != -1)
+    {
+      if (ball->speedX > 0)
+      {
+        ball->posX = lvl->blocks[closestBlock]->x1 - 6;
+      }
+      else
+      {
+        ball->posX = lvl->blocks[closestBlock]->x2 + 6;
+      }
+      ball->speedX = -1 * ball->speedX;
+      ball->nextPosX = ball->posX;
+
+      if (checkVictory(closestBlock))
+      {
+        victory();
+      }
+      ret = true;
+    }
+    else
+    {
+      ball->posX = floor(ball->nextPosX);
     }
   }
 
