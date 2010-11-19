@@ -28,6 +28,7 @@ public:
   int getGameAreaW();
   int getGameAreaH();
   bool checkCollision();
+  bool checkBlockCollision(bool X);
   int hitCount;
   static const double PI = 3.14;
   bool checkVictory(int n);
@@ -54,6 +55,7 @@ private:
   QRect rect;
   int gameAreaWidth;
   int gameAreaHeight;
+
 
 
 };
